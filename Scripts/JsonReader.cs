@@ -235,23 +235,22 @@ public class JsonReader {
 			}
 		}
 		long natural;
-		if (long.TryParse (number, out natural)) {
-			Token = JsonToken.Natural;
-			Value = natural;
-			return;
+		if (long.TryParse (number, NumberStyles.Any, CultureInfo.InvariantCulture, out natural)) {
+		    Token = JsonToken.Natural;
+		    Value = natural;
+		    return;
 		}
 		ulong unsignednatural;
-		if (ulong.TryParse(number, out unsignednatural)) {
-			Token = JsonToken.Natural;
-			Value = unsignednatural;
-			return;
+		if (ulong.TryParse(number, NumberStyles.Any, CultureInfo.InvariantCulture, out unsignednatural)) {
+		    Token = JsonToken.Natural;
+		    Value = unsignednatural;
+		    return;
 		}
 		decimal decimalreal;
-		if (Decimal.TryParse(number, out decimalreal)) {
-			Token = JsonToken.Real;
-			Value = decimalreal;
-
-			return;
+		if (Decimal.TryParse(number, NumberStyles.Any, CultureInfo.InvariantCulture, out decimalreal)) {
+		    Token = JsonToken.Real;
+		    Value = decimalreal;
+		    return;
 		}
 		// Shouldn't happen, but just in case, return something
 		Token = JsonToken.Natural;
